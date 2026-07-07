@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CryptoIntelligence vs Competitors — Feature Comparison</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --emerald-50: #ecfdf5;
+    --emerald-100: #d1fae5;
+    --emerald-200: #a7f3d0;
+    --emerald-300: #6ee7b7;
+    --emerald-400: #34d399;
+    --emerald-500: #10b981;
+    --emerald-600: #059669;
+    --emerald-700: #047857;
+    --emerald-800: #065f46;
+    --emerald-900: #064e3b;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+    --slate-950: #020617;
+    --bg-primary: #0a0f1a;
+    --bg-secondary: #111827;
+    --bg-card: #1a2332;
+    --bg-card-hover: #1f2b3d;
+    --border-color: #2a3548;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', 'Vazirmatn', system-ui, -apple-system, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+
+  /* ===== HEADER ===== */
+  .hero {
+    position: relative;
+    padding: 80px 0 60px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a0f1a 0%, #0d1f2d 40%, #0a1a2e 70%, #0a0f1a 100%);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(ellipse, rgba(16, 185, 129, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    right: -10%;
+    width: 50%;
+    height: 200%;
+    background: radial-gradient(ellipse, rgba(16, 185, 129, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--emerald-400);
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .hero-badge .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--emerald-400);
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero h1 .accent {
+    background: linear-gradient(135deg, var(--emerald-400) 0%, var(--emerald-300) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 700px;
+    line-height: 1.7;
+  }
+
+  .hero-subtitle .fa { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-stat-value {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--emerald-400);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--emerald-400);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .section-tag::before {
+    content: '';
+    width: 20px;
+    height: 2px;
+    background: var(--emerald-500);
+    border-radius: 1px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 600px;
+  }
+
+  /* ===== SUMMARY CARDS ===== */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .summary-card:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.08);
+  }
+
+  .summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--emerald-500), var(--emerald-300));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .summary-card:hover::before { opacity: 1; }
+
+  .summary-card-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .summary-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+
+  .summary-card-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--emerald-400);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .summary-card-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .summary-card-badge {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--emerald-400);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-top: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== COMPARISON TABLE ===== */
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+  }
+
+  .table-wrapper::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .table-wrapper::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background: var(--slate-700);
+    border-radius: 4px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1100px;
+  }
+
+  thead {
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, rgba(17, 24, 39, 0.8) 100%);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  thead th {
+    padding: 16px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    text-align: center;
+    border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
+  }
+
+  thead th:first-child {
+    text-align: left;
+    padding-left: 24px;
+    min-width: 220px;
+  }
+
+  thead th.our-col {
+    color: var(--emerald-400);
+    background: rgba(16, 185, 129, 0.05);
+  }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(42, 53, 72, 0.5);
+    transition: background 0.2s ease;
+  }
+
+  tbody tr:hover {
+    background: rgba(16, 185, 129, 0.02);
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody td {
+    padding: 14px 14px;
+    font-size: 14px;
+    text-align: center;
+    color: var(--text-secondary);
+    vertical-align: middle;
+  }
+
+  tbody td:first-child {
+    text-align: left;
+    padding-left: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 13px;
+  }
+
+  tbody td.our-col {
+    background: rgba(16, 185, 129, 0.04);
+    font-weight: 600;
+  }
+
+  .check { color: var(--emerald-400); font-size: 18px; }
+  .cross { color: var(--slate-600); font-size: 16px; }
+  .star { color: #fbbf24; font-size: 16px; }
+  .partial { color: var(--slate-400); font-size: 13px; font-style: italic; }
+
+  .price-free {
+    color: var(--emerald-400);
+    font-weight: 800;
+    font-size: 16px;
+  }
+
+  .price-paid {
+    color: var(--slate-400);
+    font-size: 13px;
+  }
+
+  .dim-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--emerald-400);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 2px 10px;
+    border-radius: 6px;
+  }
+
+  .dim-count-low {
+    background: rgba(100, 116, 139, 0.15);
+    color: var(--slate-400);
+  }
+
+  .category-row td {
+    background: rgba(16, 185, 129, 0.06) !important;
+    font-weight: 700 !important;
+    color: var(--emerald-300) !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 14px !important;
+  }
+
+  .category-row td:first-child {
+    padding-left: 24px !important;
+  }
+
+  /* ===== UNIQUE FEATURES ===== */
+  .unique-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+  }
+
+  .unique-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .unique-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--emerald-400), var(--emerald-600));
+    border-radius: 0 4px 4px 0;
+  }
+
+  .unique-card-number {
+    font-size: 64px;
+    font-weight: 900;
+    color: rgba(16, 185, 129, 0.08);
+    position: absolute;
+    top: -8px;
+    right: 16px;
+    line-height: 1;
+  }
+
+  .unique-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .unique-card-detail {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .unique-card-detail strong {
+    color: var(--emerald-400);
+    font-weight: 600;
+  }
+
+  .unique-tag {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--emerald-400);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-top: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== SCORE DEEP-DIVE ===== */
+  .score-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .score-visual {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px;
+  }
+
+  .score-visual h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+  }
+
+  .hierarchy-bar {
+    margin-bottom: 20px;
+  }
+
+  .hierarchy-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .hierarchy-levels {
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+    height: 100px;
+  }
+
+  .h-level {
+    flex: 1;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .h-level.ours {
+    background: linear-gradient(180deg, var(--emerald-500), var(--emerald-700));
+  }
+
+  .h-level.others {
+    background: linear-gradient(180deg, var(--slate-600), var(--slate-800));
+  }
+
+  .h-level-count {
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+  }
+
+  .h-level-name {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .score-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .score-stat {
+    background: rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .score-stat-value {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--emerald-400);
+    letter-spacing: -0.02em;
+  }
+
+  .score-stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== PRICING ===== */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .pricing-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .pricing-card.featured {
+    border-color: var(--emerald-500);
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, var(--bg-card) 100%);
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.1);
+  }
+
+  .pricing-card.featured::before {
+    content: '★ BEST VALUE';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--emerald-500);
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+  }
+
+  .pricing-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .pricing-type {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+
+  .pricing-amount {
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+
+  .pricing-amount.free { color: var(--emerald-400); }
+  .pricing-amount.paid { color: var(--text-secondary); }
+
+  .pricing-period {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .pricing-features {
+    list-style: none;
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .pricing-features li {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(42, 53, 72, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pricing-features li:last-child { border-bottom: none; }
+
+  .pricing-features .icon-check {
+    color: var(--emerald-400);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .pricing-features .icon-cross {
+    color: var(--slate-600);
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ===== ARCHITECTURE ===== */
+  .arch-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .arch-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px;
+  }
+
+  .arch-card.ours {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--bg-card) 100%);
+  }
+
+  .arch-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .arch-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  .arch-icon.local {
+    background: rgba(16, 185, 129, 0.15);
+  }
+
+  .arch-icon.cloud {
+    background: rgba(100, 116, 139, 0.15);
+  }
+
+  .arch-card-title {
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  .arch-card-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .arch-feature-list {
+    list-style: none;
+  }
+
+  .arch-feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(42, 53, 72, 0.4);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .arch-feature-list li:last-child { border-bottom: none; }
+
+  .arch-feature-list .arch-check {
+    color: var(--emerald-400);
+    font-size: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .arch-feature-list .arch-cross {
+    color: #ef4444;
+    font-size: 14px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ===== RADAR CHART ===== */
+  .radar-section {
+    text-align: center;
+  }
+
+  .radar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .radar-chart-wrap {
+    position: relative;
+  }
+
+  .radar-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .legend-item.ours .legend-color {
+    background: var(--emerald-500);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  }
+
+  .legend-item.ours {
+    color: var(--emerald-400);
+    font-weight: 600;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 40px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  footer a {
+    color: var(--emerald-400);
+    text-decoration: none;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .score-comparison, .arch-comparison {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 48px 0 40px; }
+    .hero-stats { gap: 24px; }
+    .hero-stat-value { font-size: 28px; }
+    section { padding: 48px 0; }
+    .summary-grid { grid-template-columns: 1fr; }
+    .unique-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr 1fr; }
+    .radar-container { flex-direction: column; }
+  }
+
+  @media (max-width: 480px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; color: #1a1a1a; }
+    .hero { background: #f8fafc; }
+    .hero h1 { -webkit-text-fill-color: #1a1a1a; background: none; }
+    .hero h1 .accent { -webkit-text-fill-color: #059669; }
+    .hero-stat-value { color: #059669; }
+    section { padding: 32px 0; border-bottom-color: #e2e8f0; }
+    .summary-card, .unique-card, .score-visual, .arch-card, .pricing-card {
+      background: white;
+      border-color: #e2e8f0;
+      box-shadow: none;
+    }
+    .table-wrapper { border-color: #e2e8f0; background: white; }
+    thead { background: #f1f5f9; }
+    thead th { color: #475569; border-bottom-color: #e2e8f0; }
+    tbody td { color: #475569; }
+    .check { color: #059669; }
+    .cross { color: #cbd5e1; }
+    .price-free { color: #059669; }
+    .pricing-card.featured { border-color: #059669; background: #f0fdf4; box-shadow: none; }
+    .pricing-card.featured::before { background: #059669; }
+    footer { border-top-color: #e2e8f0; }
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Competitive Analysis 2025 / تحلیل رقابتی
+    </div>
+    <h1>
+      <span class="accent">CryptoIntelligence</span> vs Competitors<br>
+      Feature Comparison
+    </h1>
+    <p class="hero-subtitle">
+      A comprehensive side-by-side analysis of multi-dimensional crypto intelligence platforms.
+      <span class="fa">تحلیل جامع و مقایسه کنار به کنار پلتفرم‌های هوشمند تحلیل رمزارزها</span>
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat animate-in">
+        <div class="hero-stat-value">12</div>
+        <div class="hero-stat-label">Scoring Dimensions</div>
+      </div>
+      <div class="hero-stat animate-in delay-1">
+        <div class="hero-stat-value">284</div>
+        <div class="hero-stat-label">ML Coefficients</div>
+      </div>
+      <div class="hero-stat animate-in delay-2">
+        <div class="hero-stat-value">16</div>
+        <div class="hero-stat-label">Cognitive Biases</div>
+      </div>
+      <div class="hero-stat animate-in delay-3">
+        <div class="hero-stat-value">$0</div>
+        <div class="hero-stat-label">Total Cost</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== SUMMARY CARDS ==================== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Key Differentiators / مزیت‌های رقابتی</div>
+      <h2 class="section-title">What Sets CryptoIntelligence Apart</h2>
+      <p class="section-desc">The only free, self-hosted, 12-dimensional scoring engine with ML optimization and behavioral finance.</p>
+    </div>
+
+    <div class="summary-grid">
+      <!-- Card 1 -->
+      <div class="summary-card animate-in">
+        <div class="summary-card-icon">🧠</div>
+        <div class="summary-card-title">Hierarchical Scoring Engine</div>
+        <div class="summary-card-value">4-Level</div>
+        <div class="summary-card-desc">
+          12 Dimensions → 37 Sub-dimensions → 74 Aspects → 161 Sub-aspects. No competitor offers this depth of hierarchical decomposition.
+        </div>
+        <div class="summary-card-badge">Exclusive / منحصر به فرد</div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="summary-card animate-in delay-1">
+        <div class="summary-card-icon">🤖</div>
+        <div class="summary-card-title">ML Coefficient Optimization</div>
+        <div class="summary-card-value">284</div>
+        <div class="summary-card-desc">
+          Daily gradient descent optimization of 284 ML coefficients. Competitors use static weights or proprietary black-box scores.
+        </div>
+        <div class="summary-card-badge">Exclusive / منحصر به فرد</div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="summary-card animate-in delay-2">
+        <div class="summary-card-icon">🛡️</div>
+        <div class="summary-card-title">Behavioral Finance Detection</div>
+        <div class="summary-card-value">16 Biases</div>
+        <div class="summary-card-desc">
+          Detects 16 cognitive biases with 16 reference books. No other platform formally identifies and flags investor behavioral traps.
+        </div>
+        <div class="summary-card-badge">Exclusive / منحصر به فرد</div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="summary-card animate-in delay-3">
+        <div class="summary-card-icon">🏠</div>
+        <div class="summary-card-title">100% Self-Hosted</div>
+        <div class="summary-card-value">Local</div>
+        <div class="summary-card-desc">
+          All data stays on your machine. Zero cloud dependency. Zero API keys leaked. Zero data shared with third parties. <span class="fa">حریم خصوصی کامل</span>
+        </div>
+        <div class="summary-card-badge">Privacy First</div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="summary-card animate-in delay-4">
+        <div class="summary-card-icon">📚</div>
+        <div class="summary-card-title">Academic Foundation</div>
+        <div class="summary-card-value">30+</div>
+        <div class="summary-card-desc">
+          30+ academic references with formula-documentation linking. Every scoring model is grounded in peer-reviewed research.
+        </div>
+        <div class="summary-card-badge">Exclusive / منحصر به فرد</div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="summary-card animate-in delay-5">
+        <div class="summary-card-icon">💰</div>
+        <div class="summary-card-title">Completely Free</div>
+        <div class="summary-card-value">$0</div>
+        <div class="summary-card-desc">
+          Open-source and self-hosted. Competitors charge up to $799/mo for comparable (or lesser) analytics. <span class="fa">کاملاً رایگان</span>
+        </div>
+        <div class="summary-card-badge">Best Value</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FEATURE COMPARISON TABLE ==================== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Detailed Comparison / مقایسه تفصیلی</div>
+      <h2 class="section-title">Feature-by-Feature Analysis</h2>
+      <p class="section-desc">Side-by-side comparison across 18 critical categories. <span class="fa">مقایسه کنار به کناس در ۱۸ دسته مهم</span></p>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature / ویژگی</th>
+            <th class="our-col">CryptoIntelligence</th>
+            <th>LunarCrush</th>
+            <th>Santiment</th>
+            <th>Glassnode</th>
+            <th>Messari</th>
+            <th>CoinGecko</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Scoring Category -->
+          <tr class="category-row">
+            <td colspan="7">⚙️ Scoring & Analytics / امتیازدهی و تحلیل</td>
+          </tr>
+
+          <tr>
+            <td>Multi-Dimensional Scoring</td>
+            <td class="our-col"><span class="check">✅</span></td>
+            <td><span class="partial">Social only</span></td>
+            <td><span class="partial">On-chain + Social</span></td>
+            <td><span class="partial">On-chain only</span></td>
+            <td><span class="partial">Fundamental only</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>Number of Scoring Dimensions</td>
+            <td class="our-col"><span class="dim-count">12</span></td>
+            <td><span class="dim-count dim-count-low">4</span></td>
+            <td><span class="dim-count dim-count-low">3</span></td>
+            <td><span class="dim-count dim-count-low">3</span></td>
+            <td><span class="dim-count dim-count-low">4</span></td>
+            <td><span class="dim-count dim-count-low">3</span></td>
+          </tr>
+
+          <tr>
+            <td>Hierarchical Scoring (4-Level)</td>
+            <td class="our-col"><span class="check">✅</span> <span style="font-size:11px;color:var(--emerald-400)">Dim→Sub→Asp→SubAsp</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>ML Coefficient Optimization</td>
+            <td class="our-col"><span class="check">✅</span> <span style="font-size:11px;color:var(--emerald-400)">284 coefficients</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <!-- Analysis Category -->
+          <tr class="category-row">
+            <td colspan="7">📊 Analysis Capabilities / قابلیت‌های تحلیلی</td>
+          </tr>
+
+          <tr>
+            <td>Behavioral Finance Bias Detection</td>
+            <td class="our-col"><span class="check">✅</span> <span style="font-size:11px;color:var(--emerald-400)">16 biases</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="partial">Behavioral analytics</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>Academic Reference Foundation</td>
+            <td class="our-col"><span class="check">✅</span> <span style="font-size:11px;color:var(--emerald-400)">30+ references</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="partial">Research reports</span></td>
+            <td><span class="partial">Research reports</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>News/Sentiment (Algorithmic NLP)</td>
+            <td class="our-col"><span class="check">✅</span> <span style="font-size:11px;color:var(--emerald-400)">AFINN + No LLM</span></td>
+            <td><span class="partial">Social sentiment</span></td>
+            <td><span class="partial">Social sentiment</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>On-Chain Analytics</td>
+            <td class="our-col"><span class="check">✅</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="check">✅</span> <span class="star">⭐</span></td>
+            <td><span class="check">✅</span> <span class="star">⭐</span></td>
+            <td><span class="partial">Basic</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>Technical Analysis</td>
+            <td class="our-col"><span class="check">✅</span></td>
+            <td><span class="partial">Market correlation</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>Macroeconomic Integration</td>
+            <td class="our-col"><span class="check">✅</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>Derivatives/Funding Data</td>
+            <td class="our-col"><span class="check">✅</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>Multi-Timeframe Analysis</td>
+            <td class="our-col"><span class="check">✅</span> <span style="font-size:11px;color:var(--emerald-400)">8 TFs</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>Prediction Engine</td>
+            <td class="our-col"><span class="check">✅</span> <span style="font-size:11px;color:var(--emerald-400)">EWMA + confidence</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="partial">Market cycles</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <!-- Infrastructure Category -->
+          <tr class="category-row">
+            <td colspan="7">🏗️ Infrastructure & Privacy / زیرساخت و حریم خصوصی</td>
+          </tr>
+
+          <tr>
+            <td>Self-Hosted / Local Deploy</td>
+            <td class="our-col"><span class="check">✅</span></td>
+            <td><span class="cross">❌</span> Cloud-only</td>
+            <td><span class="cross">❌</span> Cloud-only</td>
+            <td><span class="cross">❌</span> Cloud-only</td>
+            <td><span class="cross">❌</span> Cloud-only</td>
+            <td><span class="cross">❌</span> Cloud-only</td>
+          </tr>
+
+          <tr>
+            <td>Data Privacy (100% Local)</td>
+            <td class="our-col"><span class="check">✅</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <tr>
+            <td>LLM-Free (100% Algorithmic)</td>
+            <td class="our-col"><span class="check">✅</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+            <td><span class="cross">❌</span></td>
+          </tr>
+
+          <!-- Value Category -->
+          <tr class="category-row">
+            <td colspan="7">💵 Value & Scale / ارزش و مقیاس</td>
+          </tr>
+
+          <tr>
+            <td>Price</td>
+            <td class="our-col"><span class="price-free">FREE</span></td>
+            <td><span class="price-paid">$9.99/mo+</span></td>
+            <td><span class="price-paid">$49/mo+</span></td>
+            <td><span class="price-paid">$39–$799/mo</span></td>
+            <td><span class="price-paid">Enterprise</span></td>
+            <td><span class="price-paid">$7.99/mo+</span></td>
+          </tr>
+
+          <tr>
+            <td>Coins Supported</td>
+            <td class="our-col"><span style="color:var(--text-secondary)">20 (configurable)</span></td>
+            <td><span style="color:var(--text-secondary)">20,000+</span></td>
+            <td><span style="color:var(--text-secondary)">2,000+</span></td>
+            <td><span style="color:var(--text-secondary)">100+</span></td>
+            <td><span style="color:var(--text-secondary)">40,000+</span></td>
+            <td><span style="color:var(--text-secondary)">15,000+</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== UNIQUE FEATURES ==================== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Exclusive Features / ویژگی‌های انحصاری</div>
+      <h2 class="section-title">Only in CryptoIntelligence</h2>
+      <p class="section-desc">Features that no competitor offers at any price point. <span class="fa">ویژگی‌هایی که هیچ رقیبی در هیچ قیمتی ارائه نمی‌دهد</span></p>
+    </div>
+
+    <div class="unique-grid">
+      <div class="unique-card">
+        <div class="unique-card-number">01</div>
+        <div class="unique-card-title">4-Level Hierarchical Scoring</div>
+        <div class="unique-card-detail">
+          Dimensions → <strong>37 Sub-dimensions</strong> → <strong>74 Aspects</strong> → <strong>161 Sub-aspects</strong>. 
+          This granular decomposition enables pinpointing exactly which micro-factor drives a score change. Competitors use flat, single-level scores.
+        </div>
+        <div class="unique-tag">No Competitor Has This</div>
+      </div>
+
+      <div class="unique-card">
+        <div class="unique-card-number">02</div>
+        <div class="unique-card-title">Daily ML Gradient Descent</div>
+        <div class="unique-card-detail">
+          <strong>284 ML coefficients</strong> are optimized daily via gradient descent against historical outcomes. 
+          The scoring engine literally learns and adapts. Competitors use static, hand-tuned weights or opaque proprietary formulas.
+        </div>
+        <div class="unique-tag">No Competitor Has This</div>
+      </div>
+
+      <div class="unique-card">
+        <div class="unique-card-number">03</div>
+        <div class="unique-card-title">Behavioral Finance Bias Detection</div>
+        <div class="unique-card-detail">
+          Identifies <strong>16 cognitive biases</strong> (anchoring, confirmation bias, loss aversion, FOMO, etc.) with 
+          <strong>16 reference books</strong> from behavioral economics literature. Flags when your decisions may be compromised.
+        </div>
+        <div class="unique-tag">No Competitor Has This</div>
+      </div>
+
+      <div class="unique-card">
+        <div class="unique-card-number">04</div>
+        <div class="unique-card-title">Academic Formula-Documentation Linking</div>
+        <div class="unique-card-detail">
+          <strong>30+ peer-reviewed references</strong> linked directly to scoring formulas. Every calculation is traceable 
+          to its academic source. Complete methodological transparency — unlike black-box proprietary scores.
+        </div>
+        <div class="unique-tag">No Competitor Has This</div>
+      </div>
+
+      <div class="unique-card">
+        <div class="unique-card-number">05</div>
+        <div class="unique-card-title">8-Timeframe Per-TF Scoring</div>
+        <div class="unique-card-detail">
+          Scores computed independently across <strong>8 Binance timeframes</strong> (1m to 1M). See how fundamentals 
+          align with short-term momentum or long-term trends. No competitor offers per-timeframe dimension scoring.
+        </div>
+        <div class="unique-tag">No Competitor Has This</div>
+      </div>
+
+      <div class="unique-card">
+        <div class="unique-card-number">06</div>
+        <div class="unique-card-title">100% Algorithmic, Zero LLM</div>
+        <div class="unique-card-detail">
+          Every insight is generated by <strong>deterministic algorithms</strong> — AFINN lexicon for sentiment, 
+          EWMA for predictions, gradient descent for optimization. No LLM hallucinations, no unreliable AI narratives. 
+          <span class="fa">صفر وابستگی به LLM</span>
+        </div>
+        <div class="unique-tag">No Competitor Has This</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SCORE DEEP-DIVE ==================== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Scoring Depth / عمق امتیازدهی</div>
+      <h2 class="section-title">Scoring Architecture Comparison</h2>
+      <p class="section-desc">How deep does each platform's scoring model go? <span class="fa">مدل امتیازدهی هر پلتفرم چقدر عمیق است؟</span></p>
+    </div>
+
+    <div class="score-comparison">
+      <!-- Our Hierarchy -->
+      <div class="score-visual">
+        <h3>🟢 CryptoIntelligence — 4-Level Hierarchy</h3>
+        <div class="hierarchy-bar">
+          <div class="hierarchy-label">Level 1 — Dimensions</div>
+          <div class="hierarchy-levels">
+            <div class="h-level ours" style="height:30%">
+              <div class="h-level-count">12</div>
+              <div class="h-level-name">Dims</div>
+            </div>
+          </div>
+        </div>
+        <div class="hierarchy-bar">
+          <div class="hierarchy-label">Level 2 — Sub-dimensions</div>
+          <div class="hierarchy-levels">
+            <div class="h-level ours" style="height:55%">
+              <div class="h-level-count">37</div>
+              <div class="h-level-name">Sub-dims</div>
+            </div>
+          </div>
+        </div>
+        <div class="hierarchy-bar">
+          <div class="hierarchy-label">Level 3 — Aspects</div>
+          <div class="hierarchy-levels">
+            <div class="h-level ours" style="height:78%">
+              <div class="h-level-count">74</div>
+              <div class="h-level-name">Aspects</div>
+            </div>
+          </div>
+        </div>
+        <div class="hierarchy-bar">
+          <div class="hierarchy-label">Level 4 — Sub-aspects</div>
+          <div class="hierarchy-levels">
+            <div class="h-level ours" style="height:100%">
+              <div class="h-level-count">161</div>
+              <div class="h-level-name">Sub-asp</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Competitors -->
+      <div class="score-visual">
+        <h3>⚫ Competitors — Flat / Shallow Scoring</h3>
+        <div class="hierarchy-bar">
+          <div class="hierarchy-label">LunarCrush — Galaxy Score™</div>
+          <div class="hierarchy-levels">
+            <div class="h-level others" style="height:25%">
+              <div class="h-level-count">4</div>
+              <div class="h-level-name">Factors</div>
+            </div>
+          </div>
+        </div>
+        <div class="hierarchy-bar">
+          <div class="hierarchy-label">Santiment — On-chain + Social</div>
+          <div class="hierarchy-levels">
+            <div class="h-level others" style="height:20%">
+              <div class="h-level-count">3</div>
+              <div class="h-level-name">Groups</div>
+            </div>
+          </div>
+        </div>
+        <div class="hierarchy-bar">
+          <div class="hierarchy-label">Glassnode — On-chain Metrics</div>
+          <div class="hierarchy-levels">
+            <div class="h-level others" style="height:20%">
+              <div class="h-level-count">3</div>
+              <div class="h-level-name">Groups</div>
+            </div>
+          </div>
+        </div>
+        <div class="hierarchy-bar">
+          <div class="hierarchy-label">Messari — Fundamentals</div>
+          <div class="hierarchy-levels">
+            <div class="h-level others" style="height:25%">
+              <div class="h-level-count">4</div>
+              <div class="h-level-name">Pillars</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="score-stats" style="margin-top:32px;">
+      <div class="score-stat">
+        <div class="score-stat-value">284</div>
+        <div class="score-stat-label">ML Coefficients</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-stat-value">12</div>
+        <div class="score-stat-label">Scoring Dimensions</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-stat-value">9</div>
+        <div class="score-stat-label">Free API Sources</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-stat-value">0</div>
+        <div class="score-stat-label">LLM Dependencies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PRICING COMPARISON ==================== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Pricing / قیمت‌گذاری</div>
+      <h2 class="section-title">Cost Comparison</h2>
+      <p class="section-desc">Free and open-source vs. expensive subscriptions. <span class="fa">رایگان و متن‌باز در مقابل اشتراک‌های گران</span></p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Our Card -->
+      <div class="pricing-card featured">
+        <div class="pricing-name">CryptoIntelligence</div>
+        <div class="pricing-type">Open-Source / Self-Hosted</div>
+        <div class="pricing-amount free">$0</div>
+        <div class="pricing-period">Forever. No limits.</div>
+        <ul class="pricing-features">
+          <li><span class="icon-check">✓</span> 12-Dimension Scoring</li>
+          <li><span class="icon-check">✓</span> 284 ML Coefficients</li>
+          <li><span class="icon-check">✓</span> 16 Bias Detections</li>
+          <li><span class="icon-check">✓</span> 30+ Academic Refs</li>
+          <li><span class="icon-check">✓</span> Prediction Engine</li>
+          <li><span class="icon-check">✓</span> 8 Timeframes</li>
+          <li><span class="icon-check">✓</span> 100% Local Data</li>
+          <li><span class="icon-check">✓</span> No LLM Dependency</li>
+        </ul>
+      </div>
+
+      <!-- LunarCrush -->
+      <div class="pricing-card">
+        <div class="pricing-name">LunarCrush</div>
+        <div class="pricing-type">Cloud SaaS</div>
+        <div class="pricing-amount paid">$9.99</div>
+        <div class="pricing-period">/month (Pro tier)</div>
+        <ul class="pricing-features">
+          <li><span class="icon-cross">✗</span> Multi-Dim Scoring</li>
+          <li><span class="icon-cross">✗</span> ML Optimization</li>
+          <li><span class="icon-cross">✗</span> Behavioral Finance</li>
+          <li><span class="icon-cross">✗</span> Academic Foundation</li>
+          <li><span class="icon-cross">✗</span> Prediction Engine</li>
+          <li><span class="icon-cross">✗</span> Self-Hosted</li>
+          <li><span class="icon-check">✓</span> Social Intelligence</li>
+          <li><span class="icon-check">✓</span> 20,000+ Coins</li>
+        </ul>
+      </div>
+
+      <!-- Santiment -->
+      <div class="pricing-card">
+        <div class="pricing-name">Santiment</div>
+        <div class="pricing-type">Cloud SaaS</div>
+        <div class="pricing-amount paid">$49</div>
+        <div class="pricing-period">/month (Pro tier)</div>
+        <ul class="pricing-features">
+          <li><span class="icon-cross">✗</span> Multi-Dim Scoring</li>
+          <li><span class="icon-cross">✗</span> ML Optimization</li>
+          <li><span class="icon-cross">✗</span> Bias Detection</li>
+          <li><span class="icon-cross">✗</span> Academic Foundation</li>
+          <li><span class="icon-cross">✗</span> Prediction Engine</li>
+          <li><span class="icon-cross">✗</span> Self-Hosted</li>
+          <li><span class="icon-check">✓</span> On-chain Analytics</li>
+          <li><span class="icon-check">✓</span> Social Sentiment</li>
+        </ul>
+      </div>
+
+      <!-- Glassnode -->
+      <div class="pricing-card">
+        <div class="pricing-name">Glassnode</div>
+        <div class="pricing-type">Cloud SaaS</div>
+        <div class="pricing-amount paid">$799</div>
+        <div class="pricing-period">/month (Professional)</div>
+        <ul class="pricing-features">
+          <li><span class="icon-cross">✗</span> Multi-Dim Scoring</li>
+          <li><span class="icon-cross">✗</span> ML Optimization</li>
+          <li><span class="icon-cross">✗</span> Behavioral Finance</li>
+          <li><span class="icon-cross">✗</span> Social Sentiment</li>
+          <li><span class="icon-cross">✗</span> Self-Hosted</li>
+          <li><span class="icon-check">✓</span> Deep On-chain</li>
+          <li><span class="icon-check">✓</span> BTC/ETH Focus</li>
+          <li><span class="icon-cross">✗</span> Prediction Engine</li>
+        </ul>
+      </div>
+
+      <!-- Messari -->
+      <div class="pricing-card">
+        <div class="pricing-name">Messari</div>
+        <div class="pricing-type">Cloud SaaS</div>
+        <div class="pricing-amount paid">Custom</div>
+        <div class="pricing-period">Enterprise pricing</div>
+        <ul class="pricing-features">
+          <li><span class="icon-cross">✗</span> Multi-Dim Scoring</li>
+          <li><span class="icon-cross">✗</span> Technical Analysis</li>
+          <li><span class="icon-cross">✗</span> Behavioral Finance</li>
+          <li><span class="icon-cross">✗</span> Real-time Scoring</li>
+          <li><span class="icon-cross">✗</span> Self-Hosted</li>
+          <li><span class="icon-check">✓</span> Research Reports</li>
+          <li><span class="icon-check">✓</span> Governance Data</li>
+          <li><span class="icon-check">✓</span> 40,000+ Coins</li>
+        </ul>
+      </div>
+
+      <!-- CoinGecko -->
+      <div class="pricing-card">
+        <div class="pricing-name">CoinGecko</div>
+        <div class="pricing-type">Cloud SaaS</div>
+        <div class="pricing-amount paid">$7.99</div>
+        <div class="pricing-period">/month (API tier)</div>
+        <ul class="pricing-features">
+          <li><span class="icon-cross">✗</span> Multi-Dim Scoring</li>
+          <li><span class="icon-cross">✗</span> On-chain Data</li>
+          <li><span class="icon-cross">✗</span> Sentiment Analysis</li>
+          <li><span class="icon-cross">✗</span> Behavioral Finance</li>
+          <li><span class="icon-cross">✗</span> Self-Hosted</li>
+          <li><span class="icon-check">✓</span> Price Tracking</li>
+          <li><span class="icon-check">✓</span> Trust Score</li>
+          <li><span class="icon-check">✓</span> 15,000+ Coins</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ARCHITECTURE COMPARISON ==================== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Architecture / معماری</div>
+      <h2 class="section-title">Self-Hosted vs Cloud-Only</h2>
+      <p class="section-desc">Fundamentally different deployment philosophies. <span class="fa">فلسفه استقرار کاملاً متفاوت</span></p>
+    </div>
+
+    <div class="arch-comparison">
+      <!-- Our Architecture -->
+      <div class="arch-card ours">
+        <div class="arch-card-header">
+          <div class="arch-icon local">🏠</div>
+          <div>
+            <div class="arch-card-title" style="color:var(--emerald-400)">CryptoIntelligence</div>
+            <div class="arch-card-subtitle">Self-Hosted / Local-First</div>
+          </div>
+        </div>
+        <ul class="arch-feature-list">
+          <li>
+            <span class="arch-check">✓</span>
+            <div><strong style="color:var(--text-primary)">Next.js 16 + TypeScript</strong> — Modern, type-safe fullstack framework</div>
+          </li>
+          <li>
+            <span class="arch-check">✓</span>
+            <div><strong style="color:var(--text-primary)">SQLite (Prisma ORM)</strong> — Zero-config embedded database, no external DB server needed</div>
+          </li>
+          <li>
+            <span class="arch-check">✓</span>
+            <div><strong style="color:var(--text-primary)">shadcn/ui</strong> — Accessible, customizable component library</div>
+          </li>
+          <li>
+            <span class="arch-check">✓</span>
+            <div><strong style="color:var(--text-primary)">100% Local Data</strong> — All data stays on your machine. Zero telemetry, zero tracking</div>
+          </li>
+          <li>
+            <span class="arch-check">✓</span>
+            <div><strong style="color:var(--text-primary)">No Cloud Dependency</strong> — Runs entirely offline after initial API data fetch</div>
+          </li>
+          <li>
+            <span class="arch-check">✓</span>
+            <div><strong style="color:var(--text-primary)">9 Free API Sources</strong> — Fear&Greed, DeFiLlama, Yahoo Finance, Binance Futures, CryptoCompare, etc.</div>
+          </li>
+          <li>
+            <span class="arch-check">✓</span>
+            <div><strong style="color:var(--text-primary)">Full Source Code</strong> — Audit, modify, extend. No vendor lock-in. <span class="fa">کد منبع کامل</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Competitors Architecture -->
+      <div class="arch-card">
+        <div class="arch-card-header">
+          <div class="arch-icon cloud">☁️</div>
+          <div>
+            <div class="arch-card-title" style="color:var(--slate-400)">All Competitors</div>
+            <div class="arch-card-subtitle">Cloud-Only / SaaS</div>
+          </div>
+        </div>
+        <ul class="arch-feature-list">
+          <li>
+            <span class="arch-cross">✗</span>
+            <div><strong style="color:var(--text-primary)">Cloud-Only Deployment</strong> — No local installation possible. Requires internet connection always</div>
+          </li>
+          <li>
+            <span class="arch-cross">✗</span>
+            <div><strong style="color:var(--text-primary)">Data on Their Servers</strong> — Your usage patterns, watchlists, and preferences stored in their cloud</div>
+          </li>
+          <li>
+            <span class="arch-cross">✗</span>
+            <div><strong style="color:var(--text-primary)">API Access Paid</strong> — Most charge extra for programmatic access to your own data</div>
+          </li>
+          <li>
+            <span class="arch-cross">✗</span>
+            <div><strong style="color:var(--text-primary)">Vendor Lock-In</strong> — Cannot export models, coefficients, or custom configurations</div>
+          </li>
+          <li>
+            <span class="arch-cross">✗</span>
+            <div><strong style="color:var(--text-primary)">No Source Code</strong> — Proprietary black-box scoring. Cannot verify or audit algorithms</div>
+          </li>
+          <li>
+            <span class="arch-cross">✗</span>
+            <div><strong style="color:var(--text-primary)">Service Discontinuation Risk</strong> — If company shuts down, you lose everything</div>
+          </li>
+          <li>
+            <span class="arch-cross">✗</span>
+            <div><strong style="color:var(--text-primary)">Rate Limits & Throttling</strong> — Usage caps on all tiers, even expensive ones</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== RADAR CHART ==================== -->
+<section class="radar-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Visual Comparison / مقایسه بصری</div>
+      <h2 class="section-title">Scoring Dimension Coverage</h2>
+      <p class="section-desc" style="max-width:700px;margin:0 auto;">
+        Radar chart showing coverage across 12 analytical dimensions. CryptoIntelligence covers all 12; competitors cover 1–4 each.
+      </p>
+    </div>
+
+    <div class="radar-container">
+      <div class="radar-chart-wrap">
+        <svg viewBox="0 0 600 600" width="520" height="520" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background circles -->
+          <circle cx="300" cy="300" r="220" fill="none" stroke="#2a3548" stroke-width="1"/>
+          <circle cx="300" cy="300" r="165" fill="none" stroke="#2a3548" stroke-width="0.5"/>
+          <circle cx="300" cy="300" r="110" fill="none" stroke="#2a3548" stroke-width="0.5"/>
+          <circle cx="300" cy="300" r="55" fill="none" stroke="#2a3548" stroke-width="0.5"/>
+
+          <!-- Axis lines -->
+          <line x1="300" y1="80" x2="300" y2="520" stroke="#2a3548" stroke-width="0.5"/>
+          <line x1="109" y1="190" x2="491" y2="410" stroke="#2a3548" stroke-width="0.5"/>
+          <line x1="109" y1="410" x2="491" y2="190" stroke="#2a3548" stroke-width="0.5"/>
+          <line x1="80" y1="300" x2="520" y2="300" stroke="#2a3548" stroke-width="0.5"/>
+          <!-- Additional axes for 12 points -->
+          <line x1="300" y1="300" x2="165" y2="109" stroke="#2a3548" stroke-width="0.3"/>
+          <line x1="300" y1="300" x2="435" y2="109" stroke="#2a3548" stroke-width="0.3"/>
+          <line x1="300" y1="300" x2="435" y2="491" stroke="#2a3548" stroke-width="0.3"/>
+          <line x1="300" y1="300" x2="165" y2="491" stroke="#2a3548" stroke-width="0.3"/>
+          <line x1="300" y1="300" x2="95" y2="220" stroke="#2a3548" stroke-width="0.3"/>
+          <line x1="300" y1="300" x2="505" y2="220" stroke="#2a3548" stroke-width="0.3"/>
+          <line x1="300" y1="300" x2="505" y2="380" stroke="#2a3548" stroke-width="0.3"/>
+          <line x1="300" y1="300" x2="95" y2="380" stroke="#2a3548" stroke-width="0.3"/>
+
+          <!-- 12 points on the radar, evenly spaced at 30° intervals -->
+          <!-- Point positions (center 300,300, radius 220):
+               0°:   (300, 80)
+               30°:  (410, 127)
+               60°:  (490, 190)
+               90°:  (520, 300)
+               120°: (490, 410)
+               150°: (410, 473)
+               180°: (300, 520)
+               210°: (190, 473)
+               240°: (110, 410)
+               270°: (80, 300)
+               300°: (110, 190)
+               330°: (190, 127)
+          -->
+
+          <!-- Competitor polygon (max ~3-4 dimensions at ~40% coverage) -->
+          <polygon 
+            points="300,190 355,175 378,220 365,290 340,360 310,410 300,445 270,410 240,360 225,290 225,220 255,175"
+            fill="rgba(100, 116, 139, 0.1)" 
+            stroke="rgba(100, 116, 139, 0.4)" 
+            stroke-width="1.5"
+          />
+
+          <!-- CryptoIntelligence polygon (all 12 dimensions at ~90% coverage) -->
+          <polygon 
+            points="300,88 405,133 485,195 515,300 485,405 405,467 300,512 195,467 115,405 85,300 115,195 195,133"
+            fill="rgba(16, 185, 129, 0.12)" 
+            stroke="rgba(16, 185, 129, 0.8)" 
+            stroke-width="2.5"
+          />
+
+          <!-- Data points for CryptoIntelligence -->
+          <circle cx="300" cy="88" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="405" cy="133" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="485" cy="195" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="515" cy="300" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="485" cy="405" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="405" cy="467" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="300" cy="512" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="195" cy="467" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="115" cy="405" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="85" cy="300" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="115" cy="195" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+          <circle cx="195" cy="133" r="5" fill="#10b981" stroke="#0a0f1a" stroke-width="2"/>
+
+          <!-- Data points for competitors -->
+          <circle cx="300" cy="190" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="355" cy="175" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="378" cy="220" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="365" cy="290" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="340" cy="360" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="310" cy="410" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="300" cy="445" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="270" cy="410" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="240" cy="360" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="225" cy="290" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="225" cy="220" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+          <circle cx="255" cy="175" r="4" fill="#64748b" stroke="#0a0f1a" stroke-width="1.5"/>
+
+          <!-- Labels -->
+          <text x="300" y="68" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">Fundamental</text>
+          <text x="425" y="118" text-anchor="start" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">Technical</text>
+          <text x="500" y="190" text-anchor="start" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">On-Chain</text>
+          <text x="530" y="304" text-anchor="start" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">Market Psych</text>
+          <text x="500" y="420" text-anchor="start" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">News/Sentiment</text>
+          <text x="420" y="490" text-anchor="start" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">Macroeconomic</text>
+          <text x="300" y="540" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">Regulatory</text>
+          <text x="175" y="490" text-anchor="end" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">Network Security</text>
+          <text x="95" y="420" text-anchor="end" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">Derivatives</text>
+          <text x="65" y="304" text-anchor="end" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">Whale/Smart Money</text>
+          <text x="95" y="190" text-anchor="end" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">Ecosystem/DeFi</text>
+          <text x="175" y="118" text-anchor="end" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter, sans-serif">Inter-Market</text>
+        </svg>
+      </div>
+
+      <div class="radar-legend">
+        <div class="legend-item ours">
+          <div class="legend-color"></div>
+          <div>
+            <div style="font-weight:700">CryptoIntelligence</div>
+            <div style="font-size:12px;color:var(--text-muted)">12/12 Dimensions — Full Coverage</div>
+          </div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background:var(--slate-500)"></div>
+          <div>
+            <div style="font-weight:600">LunarCrush</div>
+            <div style="font-size:12px;color:var(--text-muted)">4/12 — Social focus only</div>
+          </div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background:var(--slate-600)"></div>
+          <div>
+            <div style="font-weight:600">Santiment</div>
+            <div style="font-size:12px;color:var(--text-muted)">3/12 — On-chain + Social</div>
+          </div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background:var(--slate-700)"></div>
+          <div>
+            <div style="font-weight:600">Glassnode</div>
+            <div style="font-size:12px;color:var(--text-muted)">3/12 — On-chain only</div>
+          </div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background:var(--slate-600)"></div>
+          <div>
+            <div style="font-weight:600">Messari</div>
+            <div style="font-size:12px;color:var(--text-muted)">4/12 — Fundamental focus</div>
+          </div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background:var(--slate-700)"></div>
+          <div>
+            <div style="font-weight:600">CoinGecko</div>
+            <div style="font-size:12px;color:var(--text-muted)">3/12 — Basic metrics only</div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;padding:20px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);border-radius:12px;">
+          <div style="font-size:14px;font-weight:700;color:var(--emerald-400);margin-bottom:6px;">Key Insight</div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
+            CryptoIntelligence is the <strong style="color:var(--emerald-400)">only platform</strong> covering all 12 analytical dimensions. 
+            Even combining all 5 competitors leaves gaps in Macroeconomic, Regulatory, Derivatives, and Behavioral Finance coverage.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="container">
+    <p style="margin-bottom:8px;">
+      <strong style="color:var(--emerald-400)">CryptoIntelligence Dashboard</strong> — Open-Source Crypto Intelligence
+    </p>
+    <p>
+      Generated March 2025 · Data based on publicly available competitor information · 
+      <span class="fa">تهیه شده марта ۲۰۲۵</span>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

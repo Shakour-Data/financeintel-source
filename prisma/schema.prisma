@@ -1,0 +1,361 @@
+// ═══════════════════════════════════════════════════════════════
+// Crypto Intelligence Dashboard — SQLite Database Schema
+//
+// Design principles:
+//   • Deep & precise: every numeric field uses proper precision (Float)
+//   • Strong typing: enums for categorical data, DateTime for time, Json for blobs
+//   • 4-Level Hierarchy: Dimension → SubDimension → Aspect → SubAspect
+//   • Indexed for fast querying (200 coins × 3+ years)
+//   • Referential integrity via FK + ON DELETE CASCADE
+//   • Audit columns (createdAt, updatedAt) on mutable rows
+//   • Score scale: 1-10 (NOT 0-100). Aggregate AI score also 1-10.
+// ═══════════════════════════════════════════════════════════════
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ───────────────────────────────────────────────────────────────
+// 1. COIN — Static coin metadata (200 high-transaction coins)
+// ───────────────────────────────────────────────────────────────
+model Coin {
+  id            String   @id @default(cuid())
+  coingeckoId   String   @unique
+  symbol        String
+  name          String
+  image         String?
+
+  // ── Classification ──
+  isL1          Boolean  @default(false)
+  isL2          Boolean  @default(false)
+  isDefi        Boolean  @default(false)
+  isStablecoin  Boolean  @default(false)
+  isMeme        Boolean  @default(false)
+  isPrivacy     Boolean  @default(false)
+  isOracle      Boolean  @default(false)
+  isExchange    Boolean  @default(false)
+  isGaming      Boolean  @default(false)
+  isAi          Boolean  @default(false)
+  isRwa         Boolean  @default(false)
+  isLst         Boolean  @default(false)
+  categories    String?
+
+  // ── Discovery / provenance ──
+  firstSeenAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // ── Relations ──
+  rawMarketDaily  RawMarketDaily[]
+  scoreHistory    ScoreHistory[]
+  dailyScores     CoinDailyScore[]
+  newsArticles    NewsArticle[]
+}
+
+// ───────────────────────────────────────────────────────────────
+// 2. RAW DATA — Daily market snapshot per coin (from CoinGecko)
+// ───────────────────────────────────────────────────────────────
+model RawMarketDaily {
+  id        String   @id @default(cuid())
+  coinId    String
+  date      String
+
+  price                Float
+  high24h              Float?
+  low24h               Float?
+  priceChange24h       Float?
+  priceChangePct1h     Float?
+  priceChangePct24h    Float?
+  priceChangePct7d     Float?
+  priceChangePct14d    Float?
+  priceChangePct30d    Float?
+  priceChangePct60d    Float?
+  priceChangePct200d   Float?
+  priceChangePct1y     Float?
+
+  marketCap               Float?
+  marketCapRank           Int?
+  marketCapChangePct24h   Float?
+  fullyDilutedValuation   Float?
+
+  totalVolume             Float?
+
+  circulatingSupply       Float?
+  totalSupply             Float?
+  maxSupply               Float?
+
+  ath                 Float?
+  athChangePct        Float?
+  athDate             String?
+  atl                 Float?
+  atlChangePct        Float?
+  atlDate             String?
+
+  sparklineData       String?
+  rawData             String?
+
+  createdAt DateTime @default(now())
+
+  coin Coin @relation(fields: [coinId], references: [id], onDelete: Cascade)
+
+  @@unique([coinId, date])
+}
+
+// ───────────────────────────────────────────────────────────────
+// 3. RAW DATA — Daily global market snapshot
+// ───────────────────────────────────────────────────────────────
+model RawGlobalDaily {
+  id        String   @id @default(cuid())
+  date      String
+
+  activeCryptos          Int?
+  totalMarketCapUsd      Float?
+  totalVolumeUsd         Float?
+  btcDominance           Float?
+  ethDominance           Float?
+  marketCapChangePct24h  Float?
+
+  rawData  String?
+  createdAt DateTime @default(now())
+
+  @@unique([date])
+}
+
+// ───────────────────────────────────────────────────────────────
+// 4. HIERARCHY NODE — The 4-level scoring hierarchy
+// ───────────────────────────────────────────────────────────────
+model HierarchyNode {
+  id            String  @id @default(cuid())
+  key           String  @unique
+  level         Int
+  name          String
+  nameFa        String
+  parentKey     String?
+  dimensionKey  String
+  color         String?
+  icon          String?
+  sortOrder     Int
+  references    String?
+
+  coefficientHistory   CoefficientHistory[]
+  scoreHistory         ScoreHistory[]
+  marketIndicatorDaily MarketIndicatorDaily[]
+}
+
+// ───────────────────────────────────────────────────────────────
+// 5. COEFFICIENT HISTORY — ML coefficient changes over time
+// ───────────────────────────────────────────────────────────────
+model CoefficientHistory {
+  id          String   @id @default(cuid())
+  nodeKey     String
+  date        String
+  version     Int
+
+  coefficient         Float
+  previousCoefficient Float?
+  coefficientChange   Float
+  predictionError     Float?
+
+  createdAt DateTime @default(now())
+
+  node HierarchyNode @relation(fields: [nodeKey], references: [key], onDelete: Cascade)
+
+  @@unique([nodeKey, date])
+}
+
+// ───────────────────────────────────────────────────────────────
+// 6. SCORE HISTORY — Computed score at each hierarchy level per coin
+// ───────────────────────────────────────────────────────────────
+model ScoreHistory {
+  id          String   @id @default(cuid())
+  coinId      String
+  nodeKey     String
+  date        String
+
+  score              Float
+  previousScore      Float?
+  scoreChange        Float?
+  coefficient        Float?
+  rawSignals         String?
+
+  createdAt DateTime @default(now())
+
+  coin Coin @relation(fields: [coinId], references: [id], onDelete: Cascade)
+  node HierarchyNode @relation(fields: [nodeKey], references: [key], onDelete: Cascade)
+
+  @@unique([coinId, nodeKey, date])
+}
+
+// ───────────────────────────────────────────────────────────────
+// 7. COIN DAILY SCORE — Aggregate AI score per coin per day
+// ───────────────────────────────────────────────────────────────
+model CoinDailyScore {
+  id          String   @id @default(cuid())
+  coinId      String
+  date        String
+
+  aiScore           Float
+  previousAiScore   Float?
+  aiScoreChange     Float?
+  confidence        String
+  coefficientVersion Int
+
+  fundamentalScore      Float?
+  technicalScore        Float?
+  onchainScore          Float?
+  marketScore           Float?
+  newsSentimentScore    Float?
+  macroeconomicScore    Float?
+  regulatoryScore       Float?
+  networkSecurityScore  Float?
+  derivativesScore      Float?
+  whaleSmartMoneyScore  Float?
+  ecosystemDefiScore    Float?
+  interMarketScore      Float?
+
+  createdAt DateTime @default(now())
+
+  coin Coin @relation(fields: [coinId], references: [id], onDelete: Cascade)
+
+  @@unique([coinId, date])
+}
+
+// ───────────────────────────────────────────────────────────────
+// 8. MARKET INDICATOR DAILY — Aggregate market-level indicators
+// ───────────────────────────────────────────────────────────────
+model MarketIndicatorDaily {
+  id          String   @id @default(cuid())
+  nodeKey     String
+  date        String
+
+  aggregateScore         Float
+  previousAggregateScore Float?
+  aggregateScoreChange   Float?
+  equalWeightScore       Float?
+  medianScore            Float?
+
+  coefficient           Float?
+  previousCoefficient   Float?
+  coefficientChange     Float?
+  coefficientVersion    Int
+
+  coinsAboveNeutral     Int?
+  coinsBelowNeutral     Int?
+  bullBearRatio         Float?
+
+  predictionError       Float?
+  optimizationDelta     Float?
+
+  createdAt DateTime @default(now())
+
+  node HierarchyNode @relation(fields: [nodeKey], references: [key], onDelete: Cascade)
+
+  @@unique([nodeKey, date])
+}
+
+// ───────────────────────────────────────────────────────────────
+// 9. MARKET DAILY SCORE — Top-level market health summary
+// ───────────────────────────────────────────────────────────────
+model MarketDailyScore {
+  id          String   @id @default(cuid())
+  date        String
+
+  marketAiScore         Float
+  previousMarketAiScore Float?
+  marketAiScoreChange   Float?
+
+  fundamentalScore      Float?
+  technicalScore        Float?
+  onchainScore          Float?
+  marketScore           Float?
+  newsSentimentScore    Float?
+
+  previousFundamentalScore Float?
+  previousTechnicalScore   Float?
+  previousOnchainScore     Float?
+  previousMarketScore      Float?
+
+  bullCoins             Int?
+  bearCoins             Int?
+  neutralCoins          Int?
+  marketBreadth         Float?
+
+  coefficientVersion    Int
+
+  createdAt DateTime @default(now())
+
+  @@unique([date])
+}
+
+// ───────────────────────────────────────────────────────────────
+// 10. NEWS ARTICLE — Cached crypto news with algorithmic sentiment
+// ───────────────────────────────────────────────────────────────
+model NewsArticle {
+  id          String   @id @default(cuid())
+  coinId      String?
+  sourceUrl   String
+  sourceName  String?
+  title       String
+  snippet     String?
+  publishedAt String?
+
+  sentimentScore     Float?
+  sentimentLabel     String?
+  impactScore        Float?
+  impactCategory     String?
+  aiSummary          String?
+  relevantCoins      String?
+
+  searchQuery        String?
+  fetchedAt          DateTime @default(now())
+
+  coin Coin? @relation(fields: [coinId], references: [id], onDelete: SetNull)
+
+  @@unique([sourceUrl])
+}
+
+// ───────────────────────────────────────────────────────────────
+// 11. PREDICTION HISTORY — ML predictions for all hierarchy levels
+// ───────────────────────────────────────────────────────────────
+model PredictionHistory {
+  id          String   @id @default(cuid())
+  coinId      String
+  nodeKey     String
+  targetDate  String
+  createdAt   String
+
+  predictedScore       Float
+  predictedChange      Float
+  predictedDirection   Int
+
+  actualScore          Float?
+  actualChange         Float?
+  actualDirection      Int?
+
+  absoluteError        Float?
+  directionCorrect     Boolean?
+
+  modelVersion         String
+  confidence           Float?
+
+  @@unique([coinId, nodeKey, targetDate])
+}
+
+// ───────────────────────────────────────────────────────────────
+// 12. TABLE CONFIG — Saved table column configurations
+// ───────────────────────────────────────────────────────────────
+model TableConfig {
+  id          String   @id @default(cuid())
+  name        String
+  columns     String   // JSON array of column configurations
+  isDefault   Boolean  @default(false)
+  isBuiltIn   Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
