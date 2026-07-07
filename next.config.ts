@@ -23,9 +23,6 @@ const nextConfig: NextConfig = {
     "127.0.0.1",
     "21.0.3.44",
   ],
-  // Turbopack native bindings are not available on Windows,
-  // so force Webpack for build/dev on this platform.
-  ...(process.platform === "win32" ? { webpack: true } : {}),
 };
 
 export default nextConfig;
