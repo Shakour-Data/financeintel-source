@@ -331,8 +331,8 @@ async function checkScoreRanges(): Promise<CheckResult[]> {
 async function checkMissingScores(): Promise<CheckResult[]> {
   const results: CheckResult[] = [];
 
-  const rawDateCount = await db.rawMarketDaily.count({ distinct: ['date'] });
-  const cdsDateCount = await db.coinDailyScore.count({ distinct: ['date'] });
+  const rawDateCount = await db.$queryRaw<Array<{ count: bigint }>>`SELECT COUNT(DISTINCT date) as count FROM "RawMarketDaily"`;
+  const cdsDateCount = await db.$queryRaw<Array<{ count: bigint }>>`SELECT COUNT(DISTINCT date) as count FROM "CoinDailyScore"`;
   const diff = rawDateCount - cdsDateCount;
 
   results.push({
