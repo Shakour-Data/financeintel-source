@@ -191,7 +191,7 @@ export function SmartSearchDialog({
     (results?.parsed.priceMin !== undefined ? 1 : 0) +
     (results?.parsed.priceMax !== undefined ? 1 : 0) +
     (results?.parsed.mcapTier !== undefined ? 1 : 0) +
-    (results?.parsed.categories.length > 0 ? 1 : 0) +
+    (results?.parsed.categories?.length > 0 ? 1 : 0) +
     (results?.parsed.sortKey !== undefined ? 1 : 0) +
     (results?.parsed.limit !== undefined ? 1 : 0);
 

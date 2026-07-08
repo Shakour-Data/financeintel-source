@@ -426,8 +426,7 @@ export function DocsPage({ onNavigate }: DocsPageProps) {
             {quickStartSteps.map((step, i) => (
               <motion.div key={step.step} variants={fadeUp} custom={i}>
                 <Card className={cn(
-                  'bg-white/[0.03] border-white/[0.06] backdrop-blur-sm hover:bg-white/[0.05] transition-all duration-300 hover:shadow-lg h-full group',
-                  step.borderColor || ''
+                  'bg-white/[0.03] border-white/[0.06] backdrop-blur-sm hover:bg-white/[0.05] transition-all duration-300 hover:shadow-lg h-full group'
                 )}>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 mb-4">

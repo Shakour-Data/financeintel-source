@@ -761,7 +761,7 @@ function PredictionErrorBarChart({ data }: { data: DimensionComparison[] }) {
               value.toFixed(2),
               name === 'mae' ? 'MAE' : 'RMSE',
             ]}
-            labelFormatter={(label: string, payload) => {
+            labelFormatter={(label: string, payload: Array<{ payload?: { fullName?: string } }>) => {
               const item = payload?.[0]?.payload;
               return item?.fullName || label;
             }}
