@@ -2871,7 +2871,7 @@ export function optimizeCoefficients(
   // Normalize dimension coefficients to sum to 1
   const dimSum = HIERARCHY.reduce((s, d) => s + (newCoefficients[d.key] ?? 0), 0);
   for (const dim of HIERARCHY) {
-    newCoefficients[dim.key] = (newCoefficients[d.key] ?? 0) / dimSum;
+    newCoefficients[dim.key] = (newCoefficients[dim.key] ?? 0) / dimSum;
   }
 
   // Update global state
@@ -2950,6 +2950,7 @@ export function calculateCryptoScore(coin: CoinInput): CryptoScore {
             score,
             previousScore: prevScore,
             scoreChange: Math.round((score - prevScore) * 10) / 10,
+            scoreChangePct: prevScore !== 0 ? Math.round(((score - prevScore) / Math.abs(prevScore)) * 10000) / 100 : 0,
           };
         });
 
@@ -2970,6 +2971,7 @@ export function calculateCryptoScore(coin: CoinInput): CryptoScore {
           score: clamp(aspectScore),
           previousScore: prevAspScore,
           scoreChange: Math.round((clamp(aspectScore) - prevAspScore) * 10) / 10,
+          scoreChangePct: prevAspScore !== 0 ? Math.round(((clamp(aspectScore) - prevAspScore) / Math.abs(prevAspScore)) * 10000) / 100 : 0,
           subAspects,
         };
       });
@@ -2988,6 +2990,7 @@ export function calculateCryptoScore(coin: CoinInput): CryptoScore {
         score: clamp(subDimScore),
         previousScore: prevSubDimScore,
         scoreChange: Math.round((clamp(subDimScore) - prevSubDimScore) * 10) / 10,
+        scoreChangePct: prevSubDimScore !== 0 ? Math.round(((clamp(subDimScore) - prevSubDimScore) / Math.abs(prevSubDimScore)) * 10000) / 100 : 0,
         aspects,
       };
     });
@@ -3008,6 +3011,7 @@ export function calculateCryptoScore(coin: CoinInput): CryptoScore {
       score: clamp(dimScore),
       previousScore: prevDimScore,
       scoreChange: Math.round((clamp(dimScore) - prevDimScore) * 10) / 10,
+      scoreChangePct: prevDimScore !== 0 ? Math.round(((clamp(dimScore) - prevDimScore) / Math.abs(prevDimScore)) * 10000) / 100 : 0,
       subDimensions,
       references: dimDef.references,
     };

@@ -498,8 +498,6 @@ export async function computeGlobalDailyFromRealData(
     const ethData = dayData.find(d => d.coin.coingeckoId === 'ethereum');
     const btcDominance = btcData && totalMarketCap > 0 ? ((btcData.marketCap ?? 0) / totalMarketCap) * 100 : null;
     const ethDominance = ethData && totalMarketCap > 0 ? ((ethData.marketCap ?? 0) / totalMarketCap) * 100 : null;
-    const btcDominance = btcData && totalMarketCap > 0 ? (btcData.marketCap / totalMarketCap) * 100 : null;
-    const ethDominance = ethData && totalMarketCap > 0 ? (ethData.marketCap / totalMarketCap) * 100 : null;
 
     // Compute 24h change
     const yesterday = addDays(date, -1);

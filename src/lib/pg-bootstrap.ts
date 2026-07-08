@@ -14,7 +14,7 @@
 
 import { execSync, execFileSync } from 'node:child_process';
 import { existsSync, appendFileSync } from 'node:fs';
-import { exists } from 'node:fs/promises';
+import { access } from 'node:fs/promises';
 
 const PG_BIN_DIR = '/home/z/pg/usr/lib/postgresql/17/bin';
 const PG_DATA_DIR = '/home/z/pgdata';
@@ -199,5 +199,10 @@ export async function ensurePostgresRunning(): Promise<void> {
  * Returns true if the postgres binaries are available.
  */
 export async function isPgAvailable(): Promise<boolean> {
-  return await exists(`${PG_BIN_DIR}/postgres`);
+  try {
+    await access(`${PG_BIN_DIR}/postgres`);
+    return true;
+  } catch {
+    return false;
+  }
 }
