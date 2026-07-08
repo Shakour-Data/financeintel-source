@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { dirname } from "path";
+import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
   output: "standalone",
   turbopack: {
     root: __dirname,
+    resolveAlias: {
+      "framer-motion": resolve(__dirname, "src/lib/framer-motion-shim.tsx"),
+    },
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "framer-motion": resolve(__dirname, "src/lib/framer-motion-shim.tsx"),
+    };
+    return config;
   },
   /* config options here */
   typescript: {
