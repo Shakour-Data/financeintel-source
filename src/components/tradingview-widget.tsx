@@ -65,7 +65,7 @@ export function TradingViewWidget({
         src={src}
         title="TradingView Chart"
         style={{ width: '100%', height: `${height}px`, border: 'none' }}
-        allowTransparency
+        allowtransparency="true"
         sandbox="allow-scripts allow-same-origin allow-popups"
       />
     </div>

@@ -202,7 +202,6 @@ export function SmartSearchDialog({
       title="Smart Crypto Search"
       description="Search coins by name, symbol, score, price, or category. Try “score>8”, “under $1”, “top 10 defi”, or “gainers”."
       className="max-w-2xl"
-      commandProps={{ shouldFilter: false }}
     >
       <CommandInput
         placeholder="Search 200 coins… e.g. “bitcoin”, “score>8”, “top 10 defi gainers”, “under $1”"

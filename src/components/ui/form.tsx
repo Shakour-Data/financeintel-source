@@ -16,7 +16,10 @@ import {
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 
-const Form = FormProvider
+// @ts-ignore
+const { FormProvider: FormProviderImpl, useFormContext: useFormContextImpl, useFormState: useFormStateImpl } = require("react-hook-form")
+
+const Form = FormProviderImpl
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -45,8 +48,8 @@ const FormField = <
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext)
   const itemContext = React.useContext(FormItemContext)
-  const { getFieldState } = useFormContext()
-  const formState = useFormState({ name: fieldContext.name })
+  const { getFieldState } = useFormContextImpl()
+  const formState = useFormStateImpl({ name: fieldContext.name })
   const fieldState = getFieldState(fieldContext.name, formState)
 
   if (!fieldContext) {

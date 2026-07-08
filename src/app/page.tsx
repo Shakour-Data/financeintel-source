@@ -47,6 +47,10 @@ const SmartSearch = dynamic(() => import('@/components/smart-search').then(m => 
 const CustomWeightsPanel = dynamic(() => import('@/components/custom-weights-panel').then(m => ({ default: m.CustomWeightsPanel })), { ssr: false });
 const ExportMenu = dynamic(() => import('@/components/export-menu').then(m => ({ default: m.ExportMenu })), { ssr: false });
 
+// Hierarchy Analysis Pages (NEW)
+const HierarchyAnalysisPage = dynamic(() => import('@/components/pages/hierarchy-analysis-page').then(m => ({ default: m.HierarchyAnalysisPage })), { ssr: false });
+const TradingViewHierarchyPage = dynamic(() => import('@/components/pages/tradingview-hierarchy-page').then(m => ({ default: m.TradingViewHierarchyPage })), { ssr: false });
+
 // Lightweight import (not dynamic) — hook has no UI
 import { useAlertEngine } from '@/hooks/use-alert-engine';
 import { useAlerts } from '@/lib/user-data';
