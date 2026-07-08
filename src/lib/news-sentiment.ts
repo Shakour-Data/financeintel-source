@@ -368,11 +368,11 @@ const SENTIMENT_LEXICON: Record<string, number> = {
   'adoption': 3, 'approve': 4, 'approved': 4, 'approval': 4, 'launch': 3,
   'partnership': 3, 'institutional': 3, 'accumulate': 2, 'upgrade': 3,
   'milestone': 3, 'all-time high': 4, 'ath': 3, 'outperform': 3,
-  'boom': 3, 'thrive': 3, 'soar': 4, 'skyrocket': 4, 'pump': 2,
+  'boom': 3, 'thrive': 3, 'skyrocket': 4, 'pump': 2,
   'gain': 2, 'gains': 2, 'profit': 2, 'profitable': 3, 'grow': 2,
   'growth': 2, 'growing': 2, 'grown': 2, 'recovery': 3, 'recover': 3,
   'recovered': 3, 'positive': 2, 'optimism': 3, 'optimistic': 3,
-  'bull': 3, 'bullrun': 4, 'bull-run': 4, 'accumulate': 2,
+  'bull': 3, 'bullrun': 4, 'bull-run': 4,
   'whale buy': 4, 'buy wall': 3, 'support': 2, 'supported': 2,
   'success': 3, 'successful': 3, 'win': 3, 'winner': 3,
   'sec approve': 5, 'etf approve': 5, 'etf approval': 5,
@@ -886,7 +886,7 @@ export async function getLatestNews(coinId?: string, limit: number = 20): Promis
       sentimentLabel: (a.sentimentLabel as NewsItem['sentimentLabel']) ?? 'neutral',
       impactScore: a.impactScore ?? 3,
       impactCategory: a.impactCategory ?? 'market',
-      autoSummary: a.autoSummary ?? '',
+      aiSummary: a.aiSummary ?? '',
       relevantCoins: a.relevantCoins ? JSON.parse(a.relevantCoins) : [],
     }));
   } catch (error) {

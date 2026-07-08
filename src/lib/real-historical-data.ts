@@ -485,18 +485,19 @@ export async function computeGlobalDailyFromRealData(
   for (const { date } of dates) {
     const dayData = await db.rawMarketDaily.findMany({
       where: { date },
-      select: { marketCap: true, totalVolume: true, coinId: true },
       include: { coin: { select: { coingeckoId: true } } },
     });
 
     if (dayData.length === 0) continue;
 
-    const totalMarketCap = dayData.reduce((s, d) => s + d.marketCap, 0);
+    const totalMarketCap = dayData.reduce((s, d) => s + (d.marketCap ?? 0), 0);
     const totalVolume = dayData.reduce((s, d) => s + (d.totalVolume ?? 0), 0);
 
     // Find BTC and ETH dominance
     const btcData = dayData.find(d => d.coin.coingeckoId === 'bitcoin');
     const ethData = dayData.find(d => d.coin.coingeckoId === 'ethereum');
+    const btcDominance = btcData && totalMarketCap > 0 ? ((btcData.marketCap ?? 0) / totalMarketCap) * 100 : null;
+    const ethDominance = ethData && totalMarketCap > 0 ? ((ethData.marketCap ?? 0) / totalMarketCap) * 100 : null;
     const btcDominance = btcData && totalMarketCap > 0 ? (btcData.marketCap / totalMarketCap) * 100 : null;
     const ethDominance = ethData && totalMarketCap > 0 ? (ethData.marketCap / totalMarketCap) * 100 : null;
 

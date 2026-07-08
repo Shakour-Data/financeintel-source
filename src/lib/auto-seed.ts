@@ -128,7 +128,7 @@ export async function ensureSeeded(): Promise<boolean> {
             atl: coin.atl,
             atlChangePct: coin.atl_change_percentage,
             atlDate: coin.atl_date ?? null,
-            rawData: coin as unknown as Record<string, unknown>,
+            rawData: JSON.stringify(coin),
           },
           create: {
             coinId: dbCoinId,
@@ -154,7 +154,7 @@ export async function ensureSeeded(): Promise<boolean> {
             atl: coin.atl,
             atlChangePct: coin.atl_change_percentage,
             atlDate: coin.atl_date ?? null,
-            rawData: coin as unknown as Record<string, unknown>,
+            rawData: JSON.stringify(coin),
           },
         });
       }

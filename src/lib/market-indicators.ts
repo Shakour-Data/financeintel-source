@@ -28,7 +28,7 @@ import { db } from '@/lib/db';
 // MarketDailyScore and MarketIndicatorDaily models. We check for this
 // and fall back to raw SQL queries if the models aren't available.
 
-const hasMarketModels = typeof (db as Record<string, unknown>).marketDailyScore !== 'undefined';
+const hasMarketModels = typeof (db as unknown as Record<string, unknown>).marketDailyScore !== 'undefined';
 
 /**
  * Safely access the marketDailyScore model. Falls back to raw SQL if needed.
@@ -53,8 +53,8 @@ async function findLatestMarketDailyScore(): Promise<{
   coefficientVersion: number;
 } | null> {
   if (hasMarketModels) {
-    return (db as Record<string, unknown>).marketDailyScore &&
-      typeof (db as Record<string, { findFirst: (...args: any[]) => Promise<any> }>).marketDailyScore?.findFirst === 'function'
+    return (db as unknown as Record<string, unknown>).marketDailyScore &&
+      typeof (db as unknown as Record<string, { findFirst: (...args: any[]) => Promise<any> }>).marketDailyScore?.findFirst === 'function'
       ? await (db as any).marketDailyScore.findFirst({ orderBy: { date: 'desc' } })
       : null;
   }
@@ -706,7 +706,9 @@ export async function computeMarketIndicators(date: string): Promise<void> {
   // Build a map: coinId → marketCap
   const marketCapMap = new Map<string, number>();
   for (const row of marketCaps) {
-    marketCapMap.set(row.coinId, row.marketCap);
+    if (row.marketCap != null) {
+      marketCapMap.set(row.coinId, row.marketCap);
+    }
   }
 
   // ── Step 3: Get yesterday's MarketIndicatorDaily for delta computation ──

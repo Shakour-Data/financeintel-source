@@ -82,15 +82,15 @@ function TabContent({ tab, coins, filters, setFilters, setSelectedCoin, filtered
             <div className="rounded-xl border bg-card p-4"><div className="text-xs text-muted-foreground mb-1">Bullish</div><div className="text-2xl font-bold text-emerald-600">{coins.filter(c => c.aiScore >= 6.5).length}</div></div>
             <div className="rounded-xl border bg-card p-4"><div className="text-xs text-muted-foreground mb-1">Bearish</div><div className="text-2xl font-bold text-red-500">{coins.filter(c => c.aiScore < 3.5).length}</div></div>
           </div>
-          <MarketHeatmap coins={coins} onSelectCoin={setSelectedCoin} />
+          <MarketHeatmap coins={coins} onSelectCoin={(coin) => setSelectedCoin(coin)} />
           <FilterBar filters={filters} onChange={setFilters} coinsCount={coins.length} filteredCount={filteredCoinsCount} />
-          <CryptoTable coins={coins} onSelectCoin={setSelectedCoin} selectedCoinId={null} externalFilters={filters} />
+          <CryptoTable coins={coins} onSelectCoin={(coin) => setSelectedCoin(coin)} selectedCoinId={null} externalFilters={filters} />
         </div>
       );
-    case 'watchlist': return <WatchlistTab coins={coins} onSelectCoin={setSelectedCoin} />;
+    case 'watchlist': return <WatchlistTab coins={coins} onSelectCoin={(coin) => setSelectedCoin(coin)} />;
     case 'portfolio': return <PortfolioTab coins={coins} />;
     case 'alerts': return <AlertsTab coins={coins} />;
-    case 'compare': return <CompareTab coins={coins} onSelectCoin={setSelectedCoin} />;
+    case 'compare': return <CompareTab coins={coins} onSelectCoin={(coin) => setSelectedCoin(coin)} />;
     default: return <PlaceholderTab tab={tab} />;
   }
 }

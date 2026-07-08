@@ -347,7 +347,7 @@ async function stage3_computeScores(): Promise<{
         symbol: rmd.coin.symbol,
         name: rmd.coin.name,
         current_price: rmd.price,
-        market_cap: rmd.marketCap,
+          market_cap: rmd.marketCap ?? 0,
         market_cap_rank: rmd.marketCapRank ?? 50,
         fully_diluted_valuation: rmd.fullyDilutedValuation,
         total_volume: rmd.totalVolume ?? 0,

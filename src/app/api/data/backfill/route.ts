@@ -237,7 +237,7 @@ export async function POST(request: NextRequest) {
 
     if (todayRecord) {
       endPrice = todayRecord.price;
-      endMarketCap = todayRecord.marketCap;
+      endMarketCap = todayRecord.marketCap ?? 0;
       endCirculatingSupply = todayRecord.circulatingSupply ?? endMarketCap / endPrice;
       endTotalSupply = todayRecord.totalSupply;
       endMaxSupply = todayRecord.maxSupply;

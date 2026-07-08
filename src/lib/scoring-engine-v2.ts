@@ -3941,7 +3941,6 @@ export async function computeAndStoreScores(
       try {
         await db.scoreHistory.createMany({
           data: scoreRows,
-          skipDuplicates: true,
         });
       } catch {
         // Fall back to individual upserts if createMany fails

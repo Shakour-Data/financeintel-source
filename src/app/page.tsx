@@ -329,12 +329,12 @@ function DashboardLayout() {
               )}
             </div>
             {dashboardMode === 'crypto' && data && (
-              <SmartSearch
-                coins={data.coins}
-                onSelectCoin={setSelectedCoin}
-                onFilterCategory={handleSearchCategory}
-                onFilterDimension={handleSearchDimension}
-              />
+                <SmartSearch
+                  coins={data.coins}
+                  onSelectCoin={(coin) => setSelectedCoin(coin)}
+                  onFilterCategory={handleSearchCategory}
+                  onFilterDimension={handleSearchDimension}
+                />
             )}
             {/* Mode Toggle */}
             <div className="shrink-0 flex items-center gap-2">
@@ -393,7 +393,7 @@ function DashboardLayout() {
                 <div className="space-y-4">
                   <StockTable
                     stocks={stockData.stocks}
-                    onSelectStock={setSelectedStock}
+                    onSelectStock={(stock) => setSelectedStock(stock)}
                     selectedCountry={selectedCountry}
                   />
                 </div>
@@ -449,9 +449,9 @@ function DashboardLayout() {
                             <span className="text-xs text-muted-foreground">{dim.label}</span>
                             <div className="flex items-center gap-2">
                               <div className="w-16 h-1.5 rounded-full bg-muted overflow-hidden">
-                                <div className="h-full rounded-full" style={{ width: `${((selectedStock as Record<string, unknown>)[dim.key] as number ?? 0) / 10 * 100}%`, backgroundColor: dim.color }} />
+                                <div className="h-full rounded-full" style={{ width: `${((selectedStock as unknown as Record<string, unknown>)[dim.key] as number ?? 0) / 10 * 100}%`, backgroundColor: dim.color }} />
                               </div>
-                              <span className="text-xs font-mono font-semibold w-7 text-right">{((selectedStock as Record<string, unknown>)[dim.key] as number ?? 0).toFixed(1)}</span>
+                               <span className="text-xs font-mono font-semibold w-7 text-right">{((selectedStock as unknown as Record<string, unknown>)[dim.key] as number ?? 0).toFixed(1)}</span>
                             </div>
                           </div>
                         ))}
@@ -534,7 +534,7 @@ function DashboardLayout() {
                       </div>
 
                       {/* Market Heatmap */}
-                      <MarketHeatmap coins={data.coins} onSelectCoin={setSelectedCoin} />
+                      <MarketHeatmap coins={data.coins} onSelectCoin={(coin) => setSelectedCoin(coin)} />
 
                       {/* Advanced Filter Bar */}
                       <FilterBar

@@ -22,8 +22,7 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient(): PrismaClient {
-  const database = new Database(dbPath);
-  const adapter = new PrismaBetterSqlite3(database);
+  const adapter = new PrismaBetterSqlite3({ url: dbPath });
   return new PrismaClient({ adapter });
 }
 

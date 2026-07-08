@@ -228,13 +228,13 @@ export async function POST(request: Request) {
 
           if (dayData.length === 0) continue;
 
-          const totalMarketCap = dayData.reduce((s, d) => s + d.marketCap, 0);
+          const totalMarketCap = dayData.reduce((s, d) => s + (d.marketCap ?? 0), 0);
           const totalVolume = dayData.reduce((s, d) => s + (d.totalVolume ?? 0), 0);
 
           const btcData = dayData.find(d => d.coin.coingeckoId === 'bitcoin');
           const ethData = dayData.find(d => d.coin.coingeckoId === 'ethereum');
-          const btcDominance = btcData && totalMarketCap > 0 ? (btcData.marketCap / totalMarketCap) * 100 : null;
-          const ethDominance = ethData && totalMarketCap > 0 ? (ethData.marketCap / totalMarketCap) * 100 : null;
+          const btcDominance = btcData && totalMarketCap > 0 ? ((btcData.marketCap ?? 0) / totalMarketCap) * 100 : null;
+          const ethDominance = ethData && totalMarketCap > 0 ? ((ethData.marketCap ?? 0) / totalMarketCap) * 100 : null;
 
           const yesterday = addDays(date, -1);
           const yesterdayGlobal = await db.rawGlobalDaily.findUnique({ where: { date: yesterday } });
@@ -475,7 +475,7 @@ async function recomputeScoresForNewDates(): Promise<number> {
             symbol: rmd.coin.symbol,
             name: rmd.coin.name,
             current_price: rmd.price,
-            market_cap: rmd.marketCap,
+            market_cap: rmd.marketCap ?? 0,
             market_cap_rank: 50,
             fully_diluted_valuation: rmd.fullyDilutedValuation,
             total_volume: rmd.totalVolume ?? 0,
@@ -483,7 +483,7 @@ async function recomputeScoresForNewDates(): Promise<number> {
             low_24h: rmd.low24h ?? rmd.price,
             price_change_24h: rmd.priceChange24h ?? 0,
             price_change_percentage_24h: rmd.priceChangePct24h ?? 0,
-            market_cap_change_24h: rmd.marketCapChangePct24h ? rmd.marketCap * (rmd.marketCapChangePct24h / 100) : 0,
+            market_cap_change_24h: rmd.marketCapChangePct24h ? (rmd.marketCap ?? 0) * (rmd.marketCapChangePct24h / 100) : 0,
             market_cap_change_percentage_24h: rmd.marketCapChangePct24h ?? 0,
             circulating_supply: rmd.circulatingSupply ?? 0,
             total_supply: rmd.totalSupply,

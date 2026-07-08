@@ -365,11 +365,11 @@ export async function runBackfillStage(
         });
         if (dayData.length === 0) continue;
 
-        const totalMarketCap = dayData.reduce((s, d) => s + d.marketCap, 0);
+        const totalMarketCap = dayData.reduce((s, d) => s + (d.marketCap ?? 0), 0);
         const totalVolume = dayData.reduce((s, d) => s + (d.totalVolume ?? 0), 0);
-        const sortedByMcap = [...dayData].sort((a, b) => b.marketCap - a.marketCap);
-        const btcDominance = sortedByMcap.length > 0 ? (sortedByMcap[0].marketCap / totalMarketCap) * 100 : null;
-        const ethDominance = sortedByMcap.length > 1 ? (sortedByMcap[1].marketCap / totalMarketCap) * 100 : null;
+        const sortedByMcap = [...dayData].sort((a, b) => (b.marketCap ?? 0) - (a.marketCap ?? 0));
+        const btcDominance = sortedByMcap.length > 0 && totalMarketCap > 0 ? (sortedByMcap[0].marketCap ?? 0) / totalMarketCap * 100 : null;
+        const ethDominance = sortedByMcap.length > 1 && totalMarketCap > 0 ? (sortedByMcap[1].marketCap ?? 0) / totalMarketCap * 100 : null;
 
         const yesterdayStr = getYesterday(dateStr);
         const yesterdayGlobal = await db.rawGlobalDaily.findUnique({ where: { date: yesterdayStr } });
@@ -429,7 +429,7 @@ export async function runBackfillStage(
           symbol: rmd.coin.symbol,
           name: rmd.coin.name,
           current_price: rmd.price,
-          market_cap: rmd.marketCap,
+          market_cap: rmd.marketCap ?? 0,
           market_cap_rank: rmd.marketCapRank ?? 50,
           fully_diluted_valuation: rmd.fullyDilutedValuation,
           total_volume: rmd.totalVolume ?? 0,
@@ -437,7 +437,7 @@ export async function runBackfillStage(
           low_24h: rmd.low24h ?? rmd.price,
           price_change_24h: rmd.priceChange24h ?? 0,
           price_change_percentage_24h: rmd.priceChangePct24h ?? 0,
-          market_cap_change_24h: rmd.marketCapChangePct24h ? rmd.marketCap * (rmd.marketCapChangePct24h / 100) : 0,
+          market_cap_change_24h: rmd.marketCapChangePct24h ? (rmd.marketCap ?? 0) * (rmd.marketCapChangePct24h / 100) : 0,
           market_cap_change_percentage_24h: rmd.marketCapChangePct24h ?? 0,
           circulating_supply: rmd.circulatingSupply ?? 0,
           total_supply: rmd.totalSupply,
@@ -534,7 +534,7 @@ export async function runBackfillStage(
           symbol: rmd.coin.symbol,
           name: rmd.coin.name,
           current_price: rmd.price,
-          market_cap: rmd.marketCap,
+          market_cap: rmd.marketCap ?? 0,
           market_cap_rank: rmd.marketCapRank ?? 50,
           fully_diluted_valuation: rmd.fullyDilutedValuation,
           total_volume: rmd.totalVolume ?? 0,
@@ -542,7 +542,7 @@ export async function runBackfillStage(
           low_24h: rmd.low24h ?? rmd.price,
           price_change_24h: rmd.priceChange24h ?? 0,
           price_change_percentage_24h: rmd.priceChangePct24h ?? 0,
-          market_cap_change_24h: rmd.marketCapChangePct24h ? rmd.marketCap * (rmd.marketCapChangePct24h / 100) : 0,
+          market_cap_change_24h: rmd.marketCapChangePct24h ? (rmd.marketCap ?? 0) * (rmd.marketCapChangePct24h / 100) : 0,
           market_cap_change_percentage_24h: rmd.marketCapChangePct24h ?? 0,
           circulating_supply: rmd.circulatingSupply ?? 0,
           total_supply: rmd.totalSupply,
